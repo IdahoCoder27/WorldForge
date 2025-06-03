@@ -72,3 +72,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.querySelectorAll(".drop-target").forEach(target => {
+    target.addEventListener("dragover", e => e.preventDefault());
+
+    target.addEventListener("drop", async e => {
+        e.preventDefault();
+        if (!draggedItem) return;
+
+        const bookId = target.getAttribute("data-book-id");
+        const bookTitle = target.getAttribute("data-book-title");
+        const { id, type, title } = draggedItem;
+
+        const isUnassign = !bookId;
+        const endpoint = isUnassign ? '/Associations/Unlink' : '/Associations/Link';
+
+        const payload = isUnassign
+            ? {
+                id: parseInt(draggedItem.id),
+                type: draggedItem.type
+            }
+            : {
+                id: parseInt(draggedItem.id),
+                bookId: parseInt(bookId),
+                type: draggedItem.type
+            };
+
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            location.reload(); // TODO: dynamic update later
+        } else {
+            const error = await response.text();
+            alert("Failed to " + (isUnassign ? "unassign" : "assign") + ": " + error);
+        }
+
+        draggedItem = null;
+    });
+});
+

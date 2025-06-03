@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "AssignCharacterToBook",
+    "RelativePath": "Associations/AssignCharacterToBook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "WorldForge.Web.Models.AssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "AssignNoteToBook",
+    "RelativePath": "Associations/AssignNoteToBook",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "WorldForge.Web.Models.AssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "Index",
+    "RelativePath": "Associations/Index",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "Link",
+    "RelativePath": "Associations/Link",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WorldForge.Web.Models.AssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "ManageAssociations",
+    "RelativePath": "Associations/ManageAssociations",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "Method": "Unlink",
+    "RelativePath": "Associations/Unlink",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "WorldForge.Web.Models.UnlinkAssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

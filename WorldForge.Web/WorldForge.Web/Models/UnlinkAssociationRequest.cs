@@ -2,15 +2,13 @@
 
 namespace WorldForge.Web.Models
 {
-    public class AssociationRequest
+    public class UnlinkAssociationRequest
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonPropertyName("bookId")]
-        public int? BookId { get; set; }
-
         [JsonPropertyName("type")]
         public string Type { get; set; }
     }
+
 }

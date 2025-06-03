@@ -17,24 +17,39 @@
                     <h5 class="card-title fw-bold">@book.Title</h5>
                     <p class="text-muted small">Drag characters or notes here</p>
 
-                    @if (book.Characters?.Any() == true)
+                    @if (book.BookCharacters?.Any() == true)
                     {
                         <div class="mb-2">
                             <strong>Characters:</strong>
-                            @foreach (var c in book.Characters)
+                            @foreach (var bc in book.BookCharacters)
                             {
-                                <span class="badge bg-secondary me-1">@c.Name</span>
+                                <div class="card mb-1 draggable-character shadow-sm"
+                                     draggable="true"
+                                     data-id="@bc.Character.Id"
+                                     data-title="@bc.Character.Name">
+                                    <div class="card-body p-2">
+                                        👤 @bc.Character.Name
+                                    </div>
+                                </div>
                             }
                         </div>
                     }
 
-                    @if (book.WorldNotes?.Any() == true)
+
+                    @if (book.BookWorldNotes?.Any() == true)
                     {
                         <div>
                             <strong>Notes:</strong>
-                            @foreach (var n in book.WorldNotes)
+                            @foreach (var bn in book.BookWorldNotes)
                             {
-                                <span class="badge bg-info text-dark me-1">@n.Title</span>
+                                <div class="card mb-1 draggable-note shadow-sm"
+                                     draggable="true"
+                                     data-id="@bn.WorldNote.Id"
+                                     data-title="@bn.WorldNote.Title">
+                                    <div class="card-body p-2">
+                                        🌍 @bn.WorldNote.Title
+                                    </div>
+                                </div>
                             }
                         </div>
                     }
@@ -70,6 +85,13 @@
             </div>
         }
     </div>
+    <div class="unassign-zone border border-danger rounded p-3 mt-5 text-center drop-target"
+         data-book-id=""
+         data-book-title="Unassigned">
+        <h5 class="text-danger fw-bold">🗑 Drop here to unassign</h5>
+        <p class="small text-muted">Drag a character or note here to remove its book association</p>
+    </div>
+
 </div>
 
 @section Scripts {

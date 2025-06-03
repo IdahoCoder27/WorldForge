@@ -25,5 +25,7 @@ namespace WorldForge.Web.Models
         [ForeignKey("BookId")]
         public int? BookId { get; set; }
         public Book? Book { get; set; }
+
+        public ICollection<BookWorldNote> BookWorldNotes { get; set; }
     }
 }

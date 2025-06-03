@@ -27,9 +27,11 @@ namespace WorldForge.Web.Models
         public string Backstory { get; set; }
 
         [Display(Name = "Book")]
-        public int BookId { get; set; }
+        public int? BookId { get; set; }
 
         [ValidateNever]
         public Book Book { get; set; }
+
+        public ICollection<BookCharacter> BookCharacters { get; set; }
     }
 }
