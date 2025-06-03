@@ -1,0 +1,75 @@
+﻿@model WorldForge.Web.Models.Character
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Character</h4>
+<hr />
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="Name" class="form-label">Full Name *</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger small" />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Gender" class="form-label">Gender</label>
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger small" />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Race" class="form-label">Race / Species</label>
+                    <input asp-for="Race" class="form-control" />
+                    <span asp-validation-for="Race" class="text-danger small" />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Role" class="form-label">Story Role</label>
+                    <input asp-for="Role" class="form-control" />
+                    <span asp-validation-for="Role" class="text-danger small" />
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Backstory" class="form-label">Backstory</label>
+                    <textarea asp-for="Backstory" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Backstory" class="text-danger small" />
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="BookId" class="form-label">Book</label>
+                    <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId"></select>
+                    <span asp-validation-for="BookId" class="text-danger small" />
+                </div>
+                <div class="mb-4">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" rows="5" placeholder="Enter character description or traits..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger small"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Status" class="form-label"></label>
+                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<CharacterStatus>()">
+                        <option value="">-- Select Status --</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary">← Back to List</a>
+                    <button type="submit" class="btn btn-primary">Save Character</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

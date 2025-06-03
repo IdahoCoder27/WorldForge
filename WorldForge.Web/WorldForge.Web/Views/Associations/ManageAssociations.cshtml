@@ -1,0 +1,77 @@
+﻿@model WorldForge.Web.Models.AssociationViewModel
+
+@{
+    ViewData["Title"] = "Manage Associations";
+}
+
+<h2 class="fw-bold mb-4">🔗 Manage Associations</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        @foreach (var book in Model.Books)
+        {
+            <div class="card glossy mb-3 drop-target shadow-sm"
+                 data-book-id="@book.Id"
+                 data-book-title="@book.Title">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">@book.Title</h5>
+                    <p class="text-muted small">Drag characters or notes here</p>
+
+                    @if (book.Characters?.Any() == true)
+                    {
+                        <div class="mb-2">
+                            <strong>Characters:</strong>
+                            @foreach (var c in book.Characters)
+                            {
+                                <span class="badge bg-secondary me-1">@c.Name</span>
+                            }
+                        </div>
+                    }
+
+                    @if (book.WorldNotes?.Any() == true)
+                    {
+                        <div>
+                            <strong>Notes:</strong>
+                            @foreach (var n in book.WorldNotes)
+                            {
+                                <span class="badge bg-info text-dark me-1">@n.Title</span>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-4">
+        <h5 class="fw-bold">Unlinked Characters</h5>
+        @foreach (var character in Model.UnlinkedCharacters)
+        {
+            <div class="card mb-2 draggable-character shadow-sm"
+                 draggable="true"
+                 data-id="@character.Id"
+                 data-title="@character.Name">
+                <div class="card-body p-2">
+                    👤 @character.Name
+                </div>
+            </div>
+        }
+
+        <h5 class="fw-bold mt-4">Unlinked World Notes</h5>
+        @foreach (var note in Model.UnlinkedWorldNotes)
+        {
+            <div class="card mb-2 draggable-note shadow-sm"
+                 draggable="true"
+                 data-id="@note.Id"
+                 data-title="@note.Title">
+                <div class="card-body p-2">
+                    🌍 @note.Title
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/drag-associations.js"></script>
+}

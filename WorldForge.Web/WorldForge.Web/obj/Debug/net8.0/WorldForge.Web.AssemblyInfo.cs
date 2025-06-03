@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WorldForge.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+986feb686b4e299f66974f381f67833fe5e93a2c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bbd5e959e246479628bc8c08e98385a7122b8f86")]
 [assembly: System.Reflection.AssemblyProductAttribute("WorldForge.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WorldForge.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

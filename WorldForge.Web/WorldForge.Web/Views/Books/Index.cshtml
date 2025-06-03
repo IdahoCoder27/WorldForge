@@ -1,0 +1,74 @@
+﻿@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+@functions {
+    string GetDisplayName(Enum value)
+    {
+        return value
+            .GetType()
+            .GetMember(value.ToString())
+            .First()
+            .GetCustomAttribute<DisplayAttribute>()?
+            .GetName() ?? value.ToString();
+    }
+}
+
+@model IEnumerable<WorldForge.Web.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">📚 Books</h2>
+    <a class="btn btn-primary" asp-action="Create">➕ Add New Book</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No books found. Start by creating one!
+    </div>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var book in Model)
+        {
+            <div class="col">
+                <div class="card glossy h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold mb-1">@book.Title</h5>
+                        <div class="text-muted small mb-2">
+                            <span class="badge bg-light text-dark">
+                                @GetDisplayName(book.Genre)
+                            </span>
+                        </div>
+
+                        <p class="card-text text-muted" style="min-height: 4.5em;">
+                            @(!string.IsNullOrWhiteSpace(book.Synopsis) ? book.Synopsis : "No synopsis available.")
+                        </p>
+
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <span class="badge bg-@(book.Status switch {
+                                BookStatus.Draft => "secondary",
+                                BookStatus.InProgress => "warning",
+                                BookStatus.Published => "success",
+                                BookStatus.OnHold => "info",
+                                BookStatus.Abandoned => "danger",
+                                _ => "dark"
+                            })">
+                                @book.Status
+                            </span>
+
+                            <div class="btn-group btn-group-sm">
+                                <a asp-action="Details" asp-route-id="@book.Id" class="btn btn-outline-secondary">View</a>
+                                <a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-outline-primary">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

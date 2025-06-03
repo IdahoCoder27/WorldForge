@@ -1,0 +1,30 @@
+﻿@model WorldForge.Web.Models.WorldNote
+@{
+    ViewData["Title"] = "Delete World Note";
+}
+
+<h2 class="fw-bold mb-4 text-danger">🗑️ Confirm Deletion</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete the note titled <strong>@Model.Title</strong>?
+</div>
+
+<form asp-action="DeleteConfirmed">
+    <input type="hidden" asp-for="Id" />
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Category</dt>
+                <dd class="col-sm-9">@Model.Category</dd>
+
+                <dt class="col-sm-3">Created</dt>
+                <dd class="col-sm-9">@Model.CreatedAt.ToLocalTime().ToString("MMMM dd, yyyy")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-outline-secondary">← Cancel</a>
+        <button type="submit" class="btn btn-danger">🗑️ Delete</button>
+    </div>
+</form>

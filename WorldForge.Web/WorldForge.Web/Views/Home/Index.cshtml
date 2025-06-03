@@ -1,8 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to WorldForge";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mt-5">
+    <h1 class="display-4">🌍 Welcome to WorldForge</h1>
+    <p class="lead text-muted">A simple way to manage your stories, characters, and world notes.</p>
+
+    <div class="mt-4">
+        <a class="btn btn-primary btn-lg me-2" asp-controller="Books" asp-action="Index">📚 Manage Books</a>
+        <a class="btn btn-secondary btn-lg me-2" asp-controller="Characters" asp-action="Index">👤 Manage Characters</a>
+        <a class="btn btn-info btn-lg me-2" asp-controller="WorldNotes" asp-action="Index">🌐 Manage World Notes</a>
+        <a class="btn btn-dark btn-lg" asp-controller="Associations" asp-action="Index">🔗 Manage Associations</a>
+    </div>
 </div>
