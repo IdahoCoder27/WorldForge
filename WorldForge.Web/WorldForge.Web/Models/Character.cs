@@ -33,5 +33,6 @@ namespace WorldForge.Web.Models
         public Book Book { get; set; }
 
         public ICollection<BookCharacter> BookCharacters { get; set; }
+        public ICollection<CharacterTrait> CharacterTraits { get; set; } = new List<CharacterTrait>();
     }
 }

@@ -47,22 +47,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!draggedItem) return;
 
-            const bookId = target.dataset.bookId;
+            const bookId = target.getAttribute("data-book-id");
+            const bookTitle = target.getAttribute("data-book-title");
+            const isSeries = target.getAttribute("data-series") === "true";
+            const { id, type } = draggedItem;
+
+            let applyToSeries = false;
+            if (isSeries) {
+                applyToSeries = confirm(`"${bookTitle}" is part of a series. Associate this ${type} with the entire series?`);
+            }
+
+            const payload = applyToSeries
+                ? { id: parseInt(id), type, bookId: parseInt(bookId), series: true }
+                : { id: parseInt(id), type, bookId: parseInt(bookId) };
 
             const response = await fetch('/Associations/Link', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    id: draggedItem.id,
-                    type: draggedItem.type,
-                    bookId: bookId
-                })
+                body: JSON.stringify(payload)
             });
 
             if (response.ok) {
-                location.reload(); // Later, change to dynamic update
+                location.reload(); // TODO: Replace with dynamic UI update
             } else {
                 const error = await response.text();
                 alert("Failed to associate: " + error);
@@ -71,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
             draggedItem = null;
         });
     });
+
 });
 
 document.querySelectorAll(".drop-target").forEach(target => {
@@ -90,6 +99,7 @@ document.querySelectorAll(".drop-target").forEach(target => {
         const payload = isUnassign
             ? {
                 id: parseInt(draggedItem.id),
+                bookId: parseInt(draggedItem.bookId),
                 type: draggedItem.type
             }
             : {

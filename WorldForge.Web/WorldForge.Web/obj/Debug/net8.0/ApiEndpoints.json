@@ -1,38 +1,6 @@
 [
   {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
-    "Method": "AssignCharacterToBook",
-    "RelativePath": "Associations/AssignCharacterToBook",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "req",
-        "Type": "WorldForge.Web.Models.AssociationRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
-    "Method": "AssignNoteToBook",
-    "RelativePath": "Associations/AssignNoteToBook",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "req",
-        "Type": "WorldForge.Web.Models.AssociationRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "ContainingType": "AssociationsController",
     "Method": "Index",
     "RelativePath": "Associations/Index",
     "HttpMethod": "",
@@ -42,7 +10,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "ContainingType": "AssociationsController",
     "Method": "Link",
     "RelativePath": "Associations/Link",
     "HttpMethod": "POST",
@@ -58,7 +26,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "ContainingType": "AssociationsController",
     "Method": "ManageAssociations",
     "RelativePath": "Associations/ManageAssociations",
     "HttpMethod": "",
@@ -68,7 +36,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "WorldForge.Web.Controllers.AssociationsController",
+    "ContainingType": "AssociationsController",
     "Method": "Unlink",
     "RelativePath": "Associations/Unlink",
     "HttpMethod": "POST",

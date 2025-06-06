@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using WorldForge.Web.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace WorldForge.Web.Data
 {
-    public class WorldForgeContext : DbContext
+    public class WorldForgeContext : IdentityDbContext<IdentityUser>
     {
         public WorldForgeContext(DbContextOptions<WorldForgeContext> options) : base(options) { }
 
@@ -13,6 +16,8 @@ namespace WorldForge.Web.Data
         public DbSet<WorldNote> WorldNotes { get; set; }
         public DbSet<BookCharacter> BookCharacters { get; set; }
         public DbSet<BookWorldNote> BookWorldNotes { get; set; }
+        public DbSet<Trait> Traits { get; set; }
+        public DbSet<CharacterTrait> CharacterTraits { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

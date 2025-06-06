@@ -4,11 +4,8 @@ namespace WorldForge.Web.Models
 {
     public class UnlinkAssociationRequest
     {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
-        [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public int Id { get; set; }          // CharacterId or WorldNoteId
+        public int BookId { get; set; }      // Required for many-to-many
+        public string Type { get; set; }     // "character" or "worldnote"
     }
-
 }

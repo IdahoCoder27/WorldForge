@@ -26,6 +26,8 @@ public class AssociationsController : Controller
 
         var unlinkedCharacters = await _context.Characters
             .Where(c => !linkedCharacterIds.Contains(c.Id))
+            .Include(c => c.CharacterTraits)
+                .ThenInclude(xt => xt.Trait)
             .ToListAsync();
 
         var unlinkedWorldNotes = await _context.WorldNotes
@@ -52,7 +54,8 @@ public class AssociationsController : Controller
         var linkedCharacterIds = books.SelectMany(b => b.BookCharacters.Select(bc => bc.CharacterId)).ToHashSet();
         var linkedNoteIds = books.SelectMany(b => b.BookWorldNotes.Select(bn => bn.WorldNoteId)).ToHashSet();
 
-        var characters = _context.Characters.Where(c => !linkedCharacterIds.Contains(c.Id)).ToList();
+        var characters = _context.Characters.Where(c => !linkedCharacterIds.Contains(c.Id)).Include(c => c.CharacterTraits)
+        .ThenInclude(ct => ct.Trait).ToList();
         var worldNotes = _context.WorldNotes.Where(n => !linkedNoteIds.Contains(n.Id)).ToList();
 
         var viewModel = new AssociationViewModel
@@ -66,40 +69,60 @@ public class AssociationsController : Controller
     }
 
     [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> Link([FromBody] AssociationRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest("Invalid request format.");
 
+        var book = await _context.Books
+            .Include(b => b.BookCharacters)
+            .Include(b => b.BookWorldNotes)
+            .FirstOrDefaultAsync(b => b.Id == request.BookId);
+
+        if (book == null)
+            return NotFound("Book not found.");
+
+        List<Book> targetBooks = new();
+
+        if (request.Series == true && book.SeriesId != null)
+        {
+            targetBooks = await _context.Books
+                .Include(b => b.BookCharacters)
+                .Include(b => b.BookWorldNotes)
+                .Where(b => b.SeriesId == book.SeriesId)
+                .ToListAsync();
+        }
+        else
+        {
+            targetBooks.Add(book);
+        }
+
         switch (request.Type.ToLower())
         {
             case "character":
                 var character = await _context.Characters.FindAsync(request.Id);
-                var existingCharLink = await _context.BookCharacters
-                    .FirstOrDefaultAsync(bc => bc.BookId == request.BookId && bc.CharacterId == request.Id);
                 if (character == null) return NotFound("Character not found.");
-                if (existingCharLink == null)
+
+                foreach (var b in targetBooks)
                 {
-                    _context.BookCharacters.Add(new BookCharacter
+                    if (!b.BookCharacters.Any(x => x.CharacterId == character.Id))
                     {
-                        BookId = (int)request.BookId,
-                        CharacterId = request.Id
-                    });
+                        b.BookCharacters.Add(new BookCharacter { BookId = b.Id, CharacterId = character.Id });
+                    }
                 }
                 break;
 
             case "worldnote":
                 var note = await _context.WorldNotes.FindAsync(request.Id);
-                var existingNoteLink = await _context.BookWorldNotes
-                    .FirstOrDefaultAsync(bn => bn.BookId == request.BookId && bn.WorldNoteId == request.Id);
                 if (note == null) return NotFound("World Note not found.");
-                if (existingNoteLink == null)
+
+                foreach (var b in targetBooks)
                 {
-                    _context.BookWorldNotes.Add(new BookWorldNote
+                    if (!b.BookWorldNotes.Any(x => x.WorldNoteId == note.Id))
                     {
-                        BookId = (int)request.BookId,
-                        WorldNoteId = request.Id
-                    });
+                        b.BookWorldNotes.Add(new BookWorldNote { BookId = b.Id, WorldNoteId = note.Id });
+                    }
                 }
                 break;
 
@@ -108,11 +131,12 @@ public class AssociationsController : Controller
         }
 
         await _context.SaveChangesAsync();
-        return Ok(new { message = "Association created successfully." });
+        return Ok(new { message = "Association applied successfully." });
     }
 
+
     [HttpPost]
-    public async Task<IActionResult> Unlink([FromBody] AssociationRequest dto)
+    public async Task<IActionResult> Unlink([FromBody] UnlinkAssociationRequest dto)
     {
         if (dto == null || string.IsNullOrEmpty(dto.Type))
             return BadRequest("Invalid request.");
@@ -120,17 +144,23 @@ public class AssociationsController : Controller
         switch (dto.Type.ToLower())
         {
             case "character":
-                var charLink = await _context.BookCharacters
+                var characterLink = await _context.BookCharacters
                     .FirstOrDefaultAsync(bc => bc.BookId == dto.BookId && bc.CharacterId == dto.Id);
-                if (charLink != null)
-                    _context.BookCharacters.Remove(charLink);
+
+                if (characterLink == null)
+                    return NotFound("Character association not found.");
+
+                _context.BookCharacters.Remove(characterLink);
                 break;
 
             case "worldnote":
                 var noteLink = await _context.BookWorldNotes
                     .FirstOrDefaultAsync(bn => bn.BookId == dto.BookId && bn.WorldNoteId == dto.Id);
-                if (noteLink != null)
-                    _context.BookWorldNotes.Remove(noteLink);
+
+                if (noteLink == null)
+                    return NotFound("World Note association not found.");
+
+                _context.BookWorldNotes.Remove(noteLink);
                 break;
 
             default:
@@ -140,4 +170,5 @@ public class AssociationsController : Controller
         await _context.SaveChangesAsync();
         return Ok(new { message = "Association removed successfully." });
     }
+
 }

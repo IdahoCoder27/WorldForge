@@ -39,6 +39,9 @@ namespace WorldForge.Web.Migrations
                     b.Property<bool>("IsSeries")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("SeriesId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -53,6 +56,36 @@ namespace WorldForge.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.BookCharacter", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "CharacterId");
+
+                    b.HasIndex("CharacterId");
+
+                    b.ToTable("BookCharacters");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.BookWorldNote", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorldNoteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "WorldNoteId");
+
+                    b.HasIndex("WorldNoteId");
+
+                    b.ToTable("BookWorldNotes");
                 });
 
             modelBuilder.Entity("WorldForge.Web.Models.Character", b =>
@@ -100,6 +133,46 @@ namespace WorldForge.Web.Migrations
                     b.ToTable("Characters");
                 });
 
+            modelBuilder.Entity("WorldForge.Web.Models.CharacterTrait", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CharacterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TraitId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("TraitId");
+
+                    b.ToTable("CharacterTraits");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.Trait", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Traits");
+                });
+
             modelBuilder.Entity("WorldForge.Web.Models.WorldNote", b =>
                 {
                     b.Property<int>("Id")
@@ -136,19 +209,76 @@ namespace WorldForge.Web.Migrations
                     b.ToTable("WorldNotes");
                 });
 
+            modelBuilder.Entity("WorldForge.Web.Models.BookCharacter", b =>
+                {
+                    b.HasOne("WorldForge.Web.Models.Book", "Book")
+                        .WithMany("BookCharacters")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorldForge.Web.Models.Character", "Character")
+                        .WithMany("BookCharacters")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Character");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.BookWorldNote", b =>
+                {
+                    b.HasOne("WorldForge.Web.Models.Book", "Book")
+                        .WithMany("BookWorldNotes")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorldForge.Web.Models.WorldNote", "WorldNote")
+                        .WithMany("BookWorldNotes")
+                        .HasForeignKey("WorldNoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("WorldNote");
+                });
+
             modelBuilder.Entity("WorldForge.Web.Models.Character", b =>
                 {
                     b.HasOne("WorldForge.Web.Models.Book", "Book")
-                        .WithMany("Characters")
+                        .WithMany()
                         .HasForeignKey("BookId");
 
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("WorldForge.Web.Models.CharacterTrait", b =>
+                {
+                    b.HasOne("WorldForge.Web.Models.Character", "Character")
+                        .WithMany("CharacterTraits")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorldForge.Web.Models.Trait", "Trait")
+                        .WithMany()
+                        .HasForeignKey("TraitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Character");
+
+                    b.Navigation("Trait");
+                });
+
             modelBuilder.Entity("WorldForge.Web.Models.WorldNote", b =>
                 {
                     b.HasOne("WorldForge.Web.Models.Book", "Book")
-                        .WithMany("WorldNotes")
+                        .WithMany()
                         .HasForeignKey("BookId");
 
                     b.Navigation("Book");
@@ -156,9 +286,21 @@ namespace WorldForge.Web.Migrations
 
             modelBuilder.Entity("WorldForge.Web.Models.Book", b =>
                 {
-                    b.Navigation("Characters");
+                    b.Navigation("BookCharacters");
 
-                    b.Navigation("WorldNotes");
+                    b.Navigation("BookWorldNotes");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.Character", b =>
+                {
+                    b.Navigation("BookCharacters");
+
+                    b.Navigation("CharacterTraits");
+                });
+
+            modelBuilder.Entity("WorldForge.Web.Models.WorldNote", b =>
+                {
+                    b.Navigation("BookWorldNotes");
                 });
 #pragma warning restore 612, 618
         }

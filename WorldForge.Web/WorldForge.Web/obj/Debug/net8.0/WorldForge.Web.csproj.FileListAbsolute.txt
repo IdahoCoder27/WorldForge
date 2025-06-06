@@ -276,10 +276,15 @@ G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebasset
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebassets.build.json.cache
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebassets.development.json
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\WorldFor.932BBDE8.Up2Date
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\WorldForge.Web.dll
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\refint\WorldForge.Web.dll
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\WorldForge.Web.pdb
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\WorldForge.Web.genruntimeconfig.cache
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\ref\WorldForge.Web.dll
-G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll

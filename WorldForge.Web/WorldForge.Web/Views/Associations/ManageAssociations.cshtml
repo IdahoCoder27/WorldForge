@@ -12,7 +12,8 @@
         {
             <div class="card glossy mb-3 drop-target shadow-sm"
                  data-book-id="@book.Id"
-                 data-book-title="@book.Title">
+                 data-book-title="@book.Title"
+                 data-series="@book.IsSeries.ToString().ToLower()">
                 <div class="card-body">
                     <h5 class="card-title fw-bold">@book.Title</h5>
                     <p class="text-muted small">Drag characters or notes here</p>
@@ -62,12 +63,20 @@
         <h5 class="fw-bold">Unlinked Characters</h5>
         @foreach (var character in Model.UnlinkedCharacters)
         {
-            <div class="card mb-2 draggable-character shadow-sm"
-                 draggable="true"
-                 data-id="@character.Id"
-                 data-title="@character.Name">
+            <div class="card mb-2 drop-trait-target shadow-sm"
+                 data-character-id="@character.Id">
                 <div class="card-body p-2">
                     👤 @character.Name
+                    <div>
+                        @* Display currently assigned traits *@
+                        @if (character.CharacterTraits?.Any() == true)
+                        {
+                            foreach (var trait in character.CharacterTraits)
+                            {
+                                <span class="badge bg-success me-1">@trait.Trait.Name</span>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         }
@@ -84,6 +93,20 @@
                 </div>
             </div>
         }
+
+        <h5>Unlinked Traits</h5>
+        @foreach (var trait in Model.UnlinkedCharacterTraits)
+        {
+            <div class="card mb-2 draggable-trait shadow-sm"
+                 draggable="true"
+                 data-id="@trait.Id"
+                 data-name="@trait.Name">
+                <div class="card-body p-2">
+                    🏷️ @trait.Name
+                </div>
+            </div>
+        }
+
     </div>
     <div class="unassign-zone border border-danger rounded p-3 mt-5 text-center drop-target"
          data-book-id=""

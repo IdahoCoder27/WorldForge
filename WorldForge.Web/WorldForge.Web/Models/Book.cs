@@ -18,6 +18,8 @@ namespace WorldForge.Web.Models
         [Display(Name = "Part of a Series?")]
         public bool IsSeries { get; set; }
 
+        public int? SeriesId { get; set; } 
+
         [Display(Name = "Status")]
         public BookStatus Status { get; set; } = BookStatus.Draft;
 
