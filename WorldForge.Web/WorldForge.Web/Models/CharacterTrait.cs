@@ -8,5 +8,7 @@
 
         public int TraitId { get; set; }
         public Trait Trait { get; set; }
+
+        public DateTime AssignedOn { get; set; }
     }
 }

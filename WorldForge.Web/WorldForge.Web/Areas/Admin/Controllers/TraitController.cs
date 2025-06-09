@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using WorldForge.Web.Data;
 using WorldForge.Web.Models;
 
-namespace WorldForge.Web.Controllers.Admin
+namespace WorldForge.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    [Route("Admin/[controller]/[action]")]
     public class TraitController : Controller
     {
         private readonly WorldForgeContext _context;
