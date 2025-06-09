@@ -37,7 +37,7 @@
                         <input class="form-check-input" type="checkbox" id="remember" />
                         <label class="form-check-label" for="remember">Remember me</label>
                     </div>
-                    <a href="#" class="text-link">Forgot password?</a>
+                    <a href="/Account/ForgotPassword" class="text-link">Forgot password?</a>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Sign in</button>
@@ -48,7 +48,7 @@
                 }
 
                 <div class="mt-4 text-center text-link">
-                    Don't have an account? <a href="#">Sign up</a>
+                    Don't have an account? <a asp-controller="Account" asp-action="Register">Sign up</a>
                 </div>
             </form>
         </div>

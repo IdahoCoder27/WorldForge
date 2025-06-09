@@ -6,6 +6,7 @@ using WorldForge.Web.Models;
 
 namespace WorldForge.Web.Controllers.Admin
 {
+    [Area("Admin")]
     [Authorize(Roles = "Admin")]
     [Route("Admin/[controller]/[action]")]
     public class TraitController : Controller

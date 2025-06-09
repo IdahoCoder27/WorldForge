@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using WorldForge.Web.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using WorldForge.Web.Interfaces;
+using WorldForge.Web.BusinessLogic;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddAuthorization();
+//builder.Services.AddTransient<IEmailSender, DevEmailSender>();
+builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("SendGrid"));
+builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
+
+
 
 var app = builder.Build();
 

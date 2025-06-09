@@ -288,3 +288,5 @@ G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.AspN
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\SendGrid.dll
+G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\StarkbankEcdsa.dll

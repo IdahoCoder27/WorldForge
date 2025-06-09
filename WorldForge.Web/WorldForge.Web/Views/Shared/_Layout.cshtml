@@ -47,16 +47,20 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Associations" asp-action="Index">Associations</a>
                     </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Trait" asp-action="Index">
+                                Traits
+                            </a>
+                        </li>
+                    }
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <a class="nav-link text-body fw-semibold" asp-area="" asp-controller="Trait" asp-action="Index">
-                                Traits
-                            </a>
-                        </li>
-                        <li class="nav-item">
+                        <li class="nav-item d-flex align-items-center">
+                            <span class="nav-link fw-semibold">Welcome @UserManager.GetUserName(User) |</span>
                             <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
                                 <button type="submit" class="nav-link btn btn-link text-danger fw-semibold" style="text-decoration: none;">
                                     Logout
