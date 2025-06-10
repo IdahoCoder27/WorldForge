@@ -1,4 +1,0 @@
-wwwroot\favicon.ico
-wwwroot\js\drag-associations.js
-wwwroot\js\site.js
-wwwroot\css\site.css
