@@ -1,0 +1,55 @@
+﻿@model WorldForge.Web.Models.ViewModels.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-light mb-4">
+        <i class="bi bi-pencil-square"></i> Edit User
+    </h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label text-light"></label>
+            <input asp-for="UserName" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label text-light"></label>
+            <input asp-for="Email" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="IsLockedOut" class="form-check-input" />
+            <label asp-for="IsLockedOut" class="form-check-label text-light">Locked Out</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-light">Roles</label>
+            <div class="row">
+                @foreach (var role in Model.AllRoles)
+                {
+                    <div class="col-md-4 mb-2">
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="SelectedRoles"
+                                   value="@role"
+                                   @(Model.SelectedRoles.Contains(role) ? "checked" : "") />
+                            <label class="form-check-label text-light">@role</label>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-lg"></i> Save Changes
+        </button>
+        <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+    </form>
+</div>

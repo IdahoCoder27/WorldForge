@@ -1,9 +1,19 @@
-﻿namespace WorldForge.Web.Models
+﻿using System.Text.Json.Serialization;
+
+namespace WorldForge.Web.Models
 {
     public class AssociationRequest
     {
-        public int Id { get; set; }           // ID of Character or WorldNote
-        public int BookId { get; set; }       // ID of Book to associate with
-        public string Type { get; set; }      // "character" or "worldnote"
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [JsonPropertyName("bookId")]
+        public int? BookId { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("series")]
+        public bool? Series { get; set; }
     }
 }

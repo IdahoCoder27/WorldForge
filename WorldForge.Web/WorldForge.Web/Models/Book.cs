@@ -18,13 +18,15 @@ namespace WorldForge.Web.Models
         [Display(Name = "Part of a Series?")]
         public bool IsSeries { get; set; }
 
+        public int? SeriesId { get; set; } 
+
         [Display(Name = "Status")]
         public BookStatus Status { get; set; } = BookStatus.Draft;
 
         [Display(Name = "Created On")]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        public ICollection<Character> Characters { get; set; } = new List<Character>();
-        public ICollection<WorldNote> WorldNotes { get; set; } = new List<WorldNote>();
+        public ICollection<BookCharacter> BookCharacters { get; set; } = new List<BookCharacter>();
+        public ICollection<BookWorldNote> BookWorldNotes { get; set; } = new List<BookWorldNote>();
     }
 }

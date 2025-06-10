@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WorldForge.Web.Models.Trait>
+
+@{
+    ViewData["Title"] = "Traits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-4">
+    <h2 class="fw-bold mb-4">🧬 Traits</h2>
+
+    <div class="mb-3">
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="Trait" asp-action="Create">➕ Add New Trait</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trait in Model)
+                {
+                    <tr>
+                        <td>@trait.Name</td>
+                        <td>@trait.Type</td>
+                        <td>@trait.Description</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-info me-2" asp-action="Edit" asp-route-id="@trait.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@trait.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
