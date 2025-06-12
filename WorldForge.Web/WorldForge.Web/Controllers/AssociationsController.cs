@@ -23,6 +23,11 @@ public class AssociationsController : Controller
 
         var linkedCharacterIds = books.SelectMany(b => b.BookCharacters.Select(bc => bc.CharacterId)).ToHashSet();
         var linkedNoteIds = books.SelectMany(b => b.BookWorldNotes.Select(bn => bn.WorldNoteId)).ToHashSet();
+        var linkedCharacterTraitIds = books
+            .SelectMany(b => b.BookCharacters)
+            .SelectMany(bc => bc.Character.CharacterTraits)
+            .Select(ct => ct.Id)
+            .ToHashSet();
 
         var unlinkedCharacters = await _context.Characters
             .Where(c => !linkedCharacterIds.Contains(c.Id))
@@ -34,11 +39,19 @@ public class AssociationsController : Controller
             .Where(n => !linkedNoteIds.Contains(n.Id))
             .ToListAsync();
 
+        var unlinkedCharacterTraits = await _context.CharacterTraits
+            .Where(ct => !linkedCharacterTraitIds.Contains(ct.Id))
+            .Include(ct => ct.Trait)
+            .Select(ct => ct.Trait)
+            .ToListAsync();
+
+
         var model = new AssociationViewModel
         {
             Books = books,
             UnlinkedCharacters = unlinkedCharacters,
-            UnlinkedWorldNotes = unlinkedWorldNotes
+            UnlinkedWorldNotes = unlinkedWorldNotes,
+            UnlinkedCharacterTraits = unlinkedCharacterTraits
         };
 
         return View("ManageAssociations", model);
@@ -68,7 +81,6 @@ public class AssociationsController : Controller
         return View(viewModel);
     }
 
-    [HttpPost]
     [HttpPost]
     public async Task<IActionResult> Link([FromBody] AssociationRequest request)
     {
@@ -139,32 +151,83 @@ public class AssociationsController : Controller
     public async Task<IActionResult> Unlink([FromBody] UnlinkAssociationRequest dto)
     {
         if (dto == null || string.IsNullOrEmpty(dto.Type))
-            return BadRequest("Invalid request.");
+            return BadRequest("Invalid request payload.");
+
+        List<Book> targetBooks = new();
+
+        // Handle book lookup only if a specific BookId is provided
+        if (dto.BookId > 0)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == dto.BookId);
+            if (book == null)
+                return NotFound("Book not found.");
+
+            if (dto.Series == true && book.SeriesId != null)
+            {
+                targetBooks = await _context.Books
+                    .Where(b => b.SeriesId == book.SeriesId)
+                    .ToListAsync();
+            }
+            else
+            {
+                targetBooks.Add(book);
+            }
+        }
 
         switch (dto.Type.ToLower())
         {
             case "character":
-                var characterLink = await _context.BookCharacters
-                    .FirstOrDefaultAsync(bc => bc.BookId == dto.BookId && bc.CharacterId == dto.Id);
+                if (dto.BookId == 0)
+                {
+                    var globalCharLinks = await _context.BookCharacters
+                        .Where(bc => bc.CharacterId == dto.Id)
+                        .ToListAsync();
 
-                if (characterLink == null)
-                    return NotFound("Character association not found.");
+                    if (!globalCharLinks.Any())
+                        return NotFound("No character associations found.");
 
-                _context.BookCharacters.Remove(characterLink);
+                    _context.BookCharacters.RemoveRange(globalCharLinks);
+                }
+                else
+                {
+                    var charLinks = await _context.BookCharacters
+                        .Where(bc => targetBooks.Select(b => b.Id).Contains(bc.BookId) && bc.CharacterId == dto.Id)
+                        .ToListAsync();
+
+                    if (!charLinks.Any())
+                        return NotFound("Character association(s) not found.");
+
+                    _context.BookCharacters.RemoveRange(charLinks);
+                }
                 break;
 
             case "worldnote":
-                var noteLink = await _context.BookWorldNotes
-                    .FirstOrDefaultAsync(bn => bn.BookId == dto.BookId && bn.WorldNoteId == dto.Id);
+                if (dto.BookId == 0)
+                {
+                    var globalNoteLinks = await _context.BookWorldNotes
+                        .Where(bn => bn.WorldNoteId == dto.Id)
+                        .ToListAsync();
 
-                if (noteLink == null)
-                    return NotFound("World Note association not found.");
+                    if (!globalNoteLinks.Any())
+                        return NotFound("No world note associations found.");
 
-                _context.BookWorldNotes.Remove(noteLink);
+                    _context.BookWorldNotes.RemoveRange(globalNoteLinks);
+                }
+                else
+                {
+                    var noteLinks = await _context.BookWorldNotes
+                        .Where(bn => targetBooks.Select(b => b.Id).Contains(bn.BookId) && bn.WorldNoteId == dto.Id)
+                        .ToListAsync();
+
+                    if (!noteLinks.Any())
+                        return NotFound("World Note association(s) not found.");
+
+                    _context.BookWorldNotes.RemoveRange(noteLinks);
+                }
                 break;
 
             default:
-                return BadRequest("Unknown type.");
+                return BadRequest("Unsupported type specified.");
         }
 
         await _context.SaveChangesAsync();

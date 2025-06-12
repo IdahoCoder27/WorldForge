@@ -10,7 +10,7 @@
     <div class="col-md-8">
         @foreach (var book in Model.Books)
         {
-            <div class="card glossy mb-3 drop-target shadow-sm"
+            <div class="card glossy mb-3 drop-target "
                  data-book-id="@book.Id"
                  data-book-title="@book.Title"
                  data-series="@book.IsSeries.ToString().ToLower()">
@@ -24,10 +24,11 @@
                             <strong>Characters:</strong>
                             @foreach (var bc in book.BookCharacters)
                             {
-                                <div class="card mb-1 draggable-character shadow-sm"
+                                <div class="card mb-1 draggable-character "
                                      draggable="true"
                                      data-id="@bc.Character.Id"
-                                     data-title="@bc.Character.Name">
+                                     data-title="@bc.Character.Name"
+                                     data-book-id="@book.Id">
                                     <div class="card-body p-2">
                                         👤 @bc.Character.Name
                                     </div>
@@ -43,10 +44,11 @@
                             <strong>Notes:</strong>
                             @foreach (var bn in book.BookWorldNotes)
                             {
-                                <div class="card mb-1 draggable-note shadow-sm"
+                                <div class="card mb-1 draggable-note "
                                      draggable="true"
                                      data-id="@bn.WorldNote.Id"
-                                     data-title="@bn.WorldNote.Title">
+                                     data-title="@bn.WorldNote.Title"
+                                     data-book-id="@book.Id">
                                     <div class="card-body p-2">
                                         🌍 @bn.WorldNote.Title
                                     </div>
@@ -63,7 +65,7 @@
         <h5 class="fw-bold">Unlinked Characters</h5>
         @foreach (var character in Model.UnlinkedCharacters)
         {
-            <div class="card mb-2 drop-trait-target shadow-sm"
+            <div class="card mb-2 drop-trait-target "
                  data-character-id="@character.Id">
                 <div class="card-body p-2">
                     👤 @character.Name
@@ -84,7 +86,7 @@
         <h5 class="fw-bold mt-4">Unlinked World Notes</h5>
         @foreach (var note in Model.UnlinkedWorldNotes)
         {
-            <div class="card mb-2 draggable-note shadow-sm"
+            <div class="card mb-2 draggable-note "
                  draggable="true"
                  data-id="@note.Id"
                  data-title="@note.Title">
@@ -97,7 +99,7 @@
         <h5>Unlinked Traits</h5>
         @foreach (var trait in Model.UnlinkedCharacterTraits)
         {
-            <div class="card mb-2 draggable-trait shadow-sm"
+            <div class="card mb-2 draggable-trait "
                  draggable="true"
                  data-id="@trait.Id"
                  data-name="@trait.Name">
@@ -109,7 +111,7 @@
 
     </div>
     <div class="unassign-zone border border-danger rounded p-3 mt-5 text-center drop-target"
-         data-book-id=""
+         data-book-id="0"
          data-book-title="Unassigned">
         <h5 class="text-danger fw-bold">🗑 Drop here to unassign</h5>
         <p class="small text-muted">Drag a character or note here to remove its book association</p>

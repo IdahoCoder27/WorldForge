@@ -1,0 +1,8 @@
+wwwroot\css\Login.css
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\images\login-side.png
+wwwroot\images\swirls.png
+wwwroot\js\drag-associations.js
+wwwroot\js\site.js
+wwwroot\css\glass.css

@@ -14,7 +14,7 @@
             @foreach (var book in Model.Books)
             {
                 <div class="col">
-                    <div class="card h-100 border-0 shadow-sm drop-target"
+                    <div class="card h-100 border-0  drop-target"
                          data-book-id="@book.Id"
                          data-book-title="@book.Title">
                         <div class="card-body">
@@ -32,7 +32,7 @@
         <div class="list-group mb-4" id="characterPool">
             @foreach (var character in Model.UnlinkedCharacters)
             {
-                <div class="list-group-item draggable-character shadow-sm"
+                <div class="list-group-item draggable-character "
                      draggable="true"
                      data-id="@character.Id"
                      data-title="@character.Name">
@@ -45,7 +45,7 @@
         <div class="list-group" id="notePool">
             @foreach (var note in Model.UnlinkedWorldNotes)
             {
-                <div class="list-group-item draggable-note shadow-sm"
+                <div class="list-group-item draggable-note "
                      draggable="true"
                      data-id="@note.Id"
                      data-title="@note.Title">

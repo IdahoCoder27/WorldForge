@@ -1,0 +1,54 @@
+[
+  {
+    "ContainingType": "AssociationsController",
+    "Method": "Index",
+    "RelativePath": "Associations/Index",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssociationsController",
+    "Method": "Link",
+    "RelativePath": "Associations/Link",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "WorldForge.Web.Models.AssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssociationsController",
+    "Method": "ManageAssociations",
+    "RelativePath": "Associations/ManageAssociations",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AssociationsController",
+    "Method": "Unlink",
+    "RelativePath": "Associations/Unlink",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "WorldForge.Web.Models.UnlinkAssociationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

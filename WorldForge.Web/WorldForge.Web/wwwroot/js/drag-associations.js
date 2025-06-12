@@ -1,7 +1,7 @@
 ﻿let draggedItem = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Set up draggable items
+    // Setup all draggable items
     document.querySelectorAll(".draggable-character, .draggable-note").forEach(el => {
         el.addEventListener("dragstart", e => {
             draggedItem = {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             el.classList.add("dragging");
 
-            // Clone as ghost image for better dragging visuals
+            // Visual ghost clone
             const ghost = el.cloneNode(true);
             ghost.style.position = "absolute";
             ghost.style.top = "-9999px";
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Set up drop targets
+    // Unified drop handler
     document.querySelectorAll(".drop-target").forEach(target => {
         target.addEventListener("dragover", e => {
             e.preventDefault();
@@ -47,24 +47,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (!draggedItem) return;
 
-            const bookId = target.getAttribute("data-book-id");
-            const bookTitle = target.getAttribute("data-book-title");
+            const bookIdAttr = target.getAttribute("data-book-id");
+            const bookTitle = target.getAttribute("data-book-title") || "";
             const isSeries = target.getAttribute("data-series") === "true";
-            const { id, type } = draggedItem;
+            const isUnassign = bookIdAttr === "0";
+            const endpoint = isUnassign ? "/Associations/Unlink" : "/Associations/Link";
 
-            let applyToSeries = false;
-            if (isSeries) {
-                applyToSeries = confirm(`"${bookTitle}" is part of a series. Associate this ${type} with the entire series?`);
+            // Build payload
+            let payload = {
+                id: parseInt(draggedItem.id),
+                type: draggedItem.type
+            };
+
+            if (!isUnassign) {
+                payload.bookId = parseInt(bookIdAttr);
+
+                // Ask if user wants to apply to the entire series
+                if (isSeries) {
+                    const confirmSeries = confirm(`"${bookTitle}" is part of a series. Associate this ${draggedItem.type} with the entire series?`);
+                    if (confirmSeries) {
+                        payload.series = true;
+                    }
+                }
+            } else {
+                payload.bookId = parseInt(bookIdAttr); // Unassign still needs BookId
             }
 
-            const payload = applyToSeries
-                ? { id: parseInt(id), type, bookId: parseInt(bookId), series: true }
-                : { id: parseInt(id), type, bookId: parseInt(bookId) };
+            if (isUnassign) {
+                payload.bookId = parseInt(bookIdAttr); // required for unlink
+            } else {
+                payload.bookId = parseInt(bookIdAttr);
 
-            const response = await fetch('/Associations/Link', {
-                method: 'POST',
+                if (isSeries) {
+                    const applyToSeries = confirm(`"${bookTitle}" is part of a series. Associate this ${draggedItem.type} with the entire series?`);
+                    if (applyToSeries) {
+                        payload.series = true;
+                    }
+                }
+            }
+
+            console.log("Payload:", JSON.stringify(payload));
+
+            // Send the request
+            const response = await fetch(endpoint, {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(payload)
             });
@@ -73,57 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 location.reload(); // TODO: Replace with dynamic UI update
             } else {
                 const error = await response.text();
-                alert("Failed to associate: " + error);
+                alert(`Failed to ${isUnassign ? "unassign" : "assign"}: ${error}`);
             }
 
             draggedItem = null;
         });
     });
-
 });
-
-document.querySelectorAll(".drop-target").forEach(target => {
-    target.addEventListener("dragover", e => e.preventDefault());
-
-    target.addEventListener("drop", async e => {
-        e.preventDefault();
-        if (!draggedItem) return;
-
-        const bookId = target.getAttribute("data-book-id");
-        const bookTitle = target.getAttribute("data-book-title");
-        const { id, type, title } = draggedItem;
-
-        const isUnassign = !bookId;
-        const endpoint = isUnassign ? '/Associations/Unlink' : '/Associations/Link';
-
-        const payload = isUnassign
-            ? {
-                id: parseInt(draggedItem.id),
-                bookId: parseInt(draggedItem.bookId),
-                type: draggedItem.type
-            }
-            : {
-                id: parseInt(draggedItem.id),
-                bookId: parseInt(bookId),
-                type: draggedItem.type
-            };
-
-        const response = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-            location.reload(); // TODO: dynamic update later
-        } else {
-            const error = await response.text();
-            alert("Failed to " + (isUnassign ? "unassign" : "assign") + ": " + error);
-        }
-
-        draggedItem = null;
-    });
-});
-
