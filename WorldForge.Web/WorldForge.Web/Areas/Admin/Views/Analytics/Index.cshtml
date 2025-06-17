@@ -1,0 +1,74 @@
+﻿@model WorldForge.Web.Models.ViewModels.AnalyticsViewModel
+
+@{
+    ViewData["Title"] = "Analytics Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <h1 class="mb-4 fw-bold text-white">📊 Analytics Dashboard</h1>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card glossy text-white text-center p-4">
+                <h4>Total Books</h4>
+                <p class="display-6 fw-bold">@Model.TotalBooks</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card glossy text-white text-center p-4">
+                <h4>Total Characters</h4>
+                <p class="display-6 fw-bold">@Model.TotalCharacters</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card glossy text-white text-center p-4">
+                <h4>Total World Notes</h4>
+                <p class="display-6 fw-bold">@Model.TotalWorldNotes</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h3 class="text-white mb-3">Monthly Active Users (Mock Data)</h3>
+        <canvas id="monthlyUsersChart" height="100"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('monthlyUsersChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Monthly Active Users',
+                    data: @Html.Raw(Json.Serialize(Model.MonthlyActiveUsers)),
+                    backgroundColor: 'rgba(0, 200, 255, 0.2)',
+                    borderColor: 'rgba(0, 200, 255, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: { color: 'white' }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'white' }
+                    },
+                    y: {
+                        ticks: { color: 'white' }
+                    }
+                }
+            }
+        });
+    </script>
+}

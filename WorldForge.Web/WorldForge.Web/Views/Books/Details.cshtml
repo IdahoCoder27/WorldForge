@@ -1,67 +1,118 @@
-﻿@using System.Reflection
-@using System.ComponentModel.DataAnnotations
-
-@functions {
-    string GetDisplayName(Enum value)
-    {
-        var member = value.GetType().GetMember(value.ToString()).FirstOrDefault();
-        var display = member?.GetCustomAttribute<DisplayAttribute>();
-        return display?.Name ?? value.ToString();
-    }
-}
-@model WorldForge.Web.Models.Book
+﻿@using WorldForge.Web.Helpers
+@model WorldForge.Web.Models.ViewModels.BookDetailsViewModel
 
 @{
-    ViewData["Title"] = "Book Details";
+    ViewData["Title"] = Model.Book.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">📖 @Model.Title</h2>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-primary me-2">✏️ Edit</a>
-        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">← Back to List</a>
+@{
+    var backgroundImage = string.IsNullOrEmpty(Model.CoverImageUrl)
+        ? Url.Content("~/images/default-cover.png")
+        : Model.CoverImageUrl;
+}
+
+<!-- Full Width Banner/Header -->
+<div style="background-image: url('@backgroundImage'); background-size: cover; background-position: center; background-repeat: no-repeat;" class="full-width-banner">
+    <div class="full-width-banner text-white text-center py-5" style="background-color: rgba(0,0,0,0.15);">
+        <h1 class="display-4 fw-bold">@Model.Book.Title</h1>
+        <p class="lead">@Model.Book.Genre.GetDisplayName()</p>
+        @if (Model.Book.IsSeries)
+        {
+            <span class="badge bg-warning text-dark">Part of a Series</span>
+        }
     </div>
 </div>
 
-<div class="card  border-0">
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-3">Genre</dt>
-            <dd class="col-sm-9">@GetDisplayName(Model.Genre)</dd>
-
-            <dt class="col-sm-3">Synopsis</dt>
-            <dd class="col-sm-9">
-                @(!string.IsNullOrWhiteSpace(Model.Synopsis) ? Model.Synopsis : "<i class='text-muted'>No synopsis provided</i>")
-            </dd>
-
-            <dt class="col-sm-3">Part of a Series?</dt>
-            <dd class="col-sm-9">
-                @if (Model.IsSeries)
-                {
-                    <span class="badge bg-success">Yes</span>
-                }
-                else
-                {
-                    <span class="badge bg-secondary">No</span>
-                }
-            </dd>
-
-            <dt class="col-sm-3">Status</dt>
-            <dd class="col-sm-9">
-                <span class="badge bg-@(Model.Status switch {
-                    BookStatus.Draft => "secondary",
-                    BookStatus.InProgress => "warning",
-                    BookStatus.Published => "success",
-                    BookStatus.OnHold => "info",
-                    BookStatus.Abandoned => "danger",
-                    _ => "dark"
-                })">
-                    @Model.Status
-                </span>
-            </dd>
-
-            <dt class="col-sm-3">Created On</dt>
-            <dd class="col-sm-9">@Model.CreatedAt.ToLocalTime().ToString("MMMM dd, yyyy @ h:mm tt")</dd>
-        </dl>
+<!-- Synopsis & Status -->
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="fw-bold">Synopsis</h4>
+            <p>@Model.Book.Synopsis</p>
+        </div>
+        <div class="col-md-4">
+            <h5 class="fw-bold">Details</h5>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Status:</strong> @Model.Book.Status</li>
+                <li class="list-group-item"><strong>Created:</strong> @Model.Book.CreatedAt.ToShortDateString()</li>
+            </ul>
+        </div>
     </div>
+</div>
+
+<!-- Characters -->
+@if (Model.Characters?.Any() == true)
+{
+    <div class="container my-5">
+        <h4 class="fw-bold mb-3">Characters</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            @foreach (var character in Model.Characters)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">👤 @character.Name</h5>
+                            @if (character.CharacterTraits?.Any() == true)
+                            {
+                                <div class="mt-2">
+                                    @foreach (var trait in character.CharacterTraits)
+                                    {
+                                        <span class="badge bg-success me-1">@trait.Trait.Name</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!-- World Notes -->
+@if (Model.WorldNotes?.Any() == true)
+{
+    <div class="container my-5">
+        <h4 class="fw-bold mb-3">World Notes</h4>
+        <div class="row row-cols-1 row-cols-md-2 g-3">
+            @foreach (var note in Model.WorldNotes)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">🌍 @note.Title</h5>
+                            <p class="card-text text-muted">@note.Content?.Truncate(150)</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<!-- Other Books in Series -->
+@if (Model.OtherBooksInSeries?.Any() == true)
+{
+    <div class="container my-5">
+        <h4 class="fw-bold mb-3">Other Books in the Series</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            @foreach (var b in Model.OtherBooksInSeries.Where(b => b.Id != Model.Book.Id))
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@b.Title</h5>
+                            <p class="card-text">@b.Genre</p>
+                            <a href="@Url.Action("Details", "Books", new { id = b.Id })" class="btn btn-outline-primary btn-sm">View</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="mt-4 text-center">
+    <a asp-action="Index" class="btn btn-secondary">← Back to Library</a>
 </div>

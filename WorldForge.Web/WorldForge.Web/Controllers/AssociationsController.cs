@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WorldForge.Web.Data;
 using WorldForge.Web.Models;
+using WorldForge.Web.Models.ViewModels;
 
 [ApiController]
 [Route("[controller]/[action]")]

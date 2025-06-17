@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using WorldForge.Web.Interfaces;
 using WorldForge.Web.Models;
+using WorldForge.Web.Models.ViewModels;
 
 namespace WorldForge.Web.Controllers
 {

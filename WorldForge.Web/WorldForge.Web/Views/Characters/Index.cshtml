@@ -24,7 +24,7 @@ else
                         <h5 class="card-title fw-bold mb-1">@character.Name</h5>
                         <div class="text-muted small mb-2">@character.Race — @character.Role</div>
 
-                        <p class="card-text text-muted" style="min-height: 4.5em;">
+                        <p class="card-text text-muted description-preview" style="min-height: 4.5em;">
                             @(!string.IsNullOrWhiteSpace(character.Description) ? character.Description : "No description provided.")
                         </p>
 

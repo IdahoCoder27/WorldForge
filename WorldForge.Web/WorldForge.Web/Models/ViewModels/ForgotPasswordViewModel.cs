@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WorldForge.Web.Models
+namespace WorldForge.Web.Models.ViewModels
 {
     public class ForgotPasswordViewModel
     {

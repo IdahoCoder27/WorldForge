@@ -1,60 +1,95 @@
-﻿@model WorldForge.Web.Models.Character
+﻿@model WorldForge.Web.Models.ViewModels.CharacterDetailsViewModel
 
 @{
-    ViewData["Title"] = "Character Details";
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var backgroundImage = Model.Books?.FirstOrDefault()?.CoverImageUrl;
+    var fallbackImage = Url.Content("~/images/default-cover.png");
+    var headerImage = string.IsNullOrWhiteSpace(backgroundImage) ? fallbackImage : Url.Content(backgroundImage);
+    var characterImage = string.IsNullOrWhiteSpace(Model.CharacterImageUrl)
+        ? Url.Content("~/images/default-character.png")
+        : Url.Content(Model.CharacterImageUrl);
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">🧑‍🎤 @Model.Name</h2>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-primary me-2">✏️ Edit</a>
-        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">← Back to List</a>
+<!-- Top Banner with Book Cover -->
+<div class="full-width-banner" style="background-image: url('@headerImage'); background-size: cover; background-position: center;">
+    <div class="full-width-banner text-white text-center py-5" style="background-color: rgba(0,0,0,0.15);">
+        <h1 class="display-4 fw-bold">@Model.Name</h1>
+        @if (Model.Books != null && Model.Books.Any())
+        {
+            <p class="lead">
+                Appears in:
+                @foreach (var book in Model.Books)
+                {
+                    <span class="badge bg-info text-dark mx-1">@book.Title</span>
+                }
+            </p>
+        }
     </div>
 </div>
 
-<div class="card  border-0">
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-3">Gender</dt>
-            <dd class="col-sm-9">@Model.Gender</dd>
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row">
+        <!-- Character Image -->
+        <div class="col-md-3 text-center">
+            <img src="@characterImage" alt="@Model.Name" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;" />
+        </div>
 
-            <dt class="col-sm-3">Race</dt>
-            <dd class="col-sm-9">@Model.Race</dd>
+        <!-- Character Info -->
+        <div class="col-md-9">
+            <h4 class="fw-bold mb-3">Character Information</h4>
 
-            <dt class="col-sm-3">Role</dt>
-            <dd class="col-sm-9">@Model.Role</dd>
+            <dl class="row">
+                <dt class="col-sm-3">Gender</dt>
+                <dd class="col-sm-9">@Model.Gender</dd>
 
-            <dt class="col-sm-3">Status</dt>
-            <dd class="col-sm-9">
-                <span class="badge bg-@(Model.Status switch {
-                    CharacterStatus.Active => "success",
-                    CharacterStatus.Inactive => "secondary",
-                    CharacterStatus.Deceased => "danger",
-                    CharacterStatus.Missing => "warning",
-                    _ => "dark"
-                })">
-                    @Model.Status
-                </span>
-            </dd>
+                <dt class="col-sm-3">Race</dt>
+                <dd class="col-sm-9">@Model.Race</dd>
 
-            <dt class="col-sm-3">Book</dt>
-            <dd class="col-sm-9">
-                @if (Model.Book != null)
-                {
-                    <a asp-controller="Books" asp-action="Details" asp-route-id="@Model.BookId">@Model.Book.Title</a>
-                }
-                else
-                {
-                    <span class="text-muted">Unassigned</span>
-                }
-            </dd>
+                <dt class="col-sm-3">Role</dt>
+                <dd class="col-sm-9">@Model.Role</dd>
 
-            <dt class="col-sm-3">Description</dt>
-            <dd class="col-sm-9">
-                @(!string.IsNullOrWhiteSpace(Model.Description) 
-                    ? Model.Description 
-                    : "<i class='text-muted'>No description provided</i>")
-            </dd>
-        </dl>
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">@Model.Status</dd>
+            </dl>
+
+            <h5 class="mt-4">Biography</h5>
+            <p class="lead">@Model.Description</p>
+
+            @if (!string.IsNullOrWhiteSpace(Model.Backstory))
+            {
+                <h5 class="mt-4">Backstory</h5>
+                <p>@Model.Backstory</p>
+            }
+
+            @if (Model.CharacterTraits != null && Model.CharacterTraits.Any())
+            {
+                <h5 class="mt-4">Traits</h5>
+                <div class="d-flex flex-wrap">
+                    @foreach (var trait in Model.CharacterTraits)
+                    {
+                        <span class="badge bg-secondary me-2 mb-2">@trait.Trait.Name</span>
+                    }
+                </div>
+            }
+
+            @if (Model.Books != null && Model.Books.Any())
+            {
+                <h5 class="mt-4">Books Featuring This Character</h5>
+                <ul>
+                    @foreach (var book in Model.Books)
+                    {
+                        <li><a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">@book.Title</a></li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="mt-5">
+        <a asp-action="Index" class="btn btn-outline-light">&larr; Back to Characters</a>
     </div>
 </div>

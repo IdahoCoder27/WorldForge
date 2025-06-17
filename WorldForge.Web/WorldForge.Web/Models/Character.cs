@@ -21,6 +21,8 @@ namespace WorldForge.Web.Models
 
         public string Description { get; set; }
 
+        public string CharacterImageUrl { get; set; }
+
         public CharacterStatus Status { get; set; } = CharacterStatus.Active;
 
         [Display(Name = "Character Backstory")]

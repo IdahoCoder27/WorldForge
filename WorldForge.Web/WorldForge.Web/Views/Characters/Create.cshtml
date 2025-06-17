@@ -1,81 +1,85 @@
-﻿@model WorldForge.Web.Models.Character
+﻿@model WorldForge.Web.Models.ViewModels.CreateCharacterViewModel
 
 @{
     ViewData["Title"] = "Create Character";
 }
 
-<h2 class="fw-bold mb-4">🧙 Create New Character</h2>
+<h2 class="fw-bold mb-4">🧬 Create New Character</h2>
 
-<div class="card ">
-    <div class="card-body">
-        <form asp-action="Create">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label asp-for="Name" class="form-label">Full Name *</label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger small" />
-                </div>
-
-                <div class="col-md-6">
-                    <label asp-for="Gender" class="form-label">Gender</label>
-                    <input asp-for="Gender" class="form-control" />
-                    <span asp-validation-for="Gender" class="text-danger small" />
-                </div>
-
-                <div class="col-md-6">
-                    <label asp-for="Race" class="form-label">Race / Species</label>
-                    <input asp-for="Race" class="form-control" />
-                    <span asp-validation-for="Race" class="text-danger small" />
-                </div>
-
-                <div class="col-md-6">
-                    <label asp-for="Role" class="form-label">Story Role</label>
-                    <input asp-for="Role" class="form-control" />
-                    <span asp-validation-for="Role" class="text-danger small" />
-                </div>
-
-                <div class="col-12">
-                    <label asp-for="Backstory" class="form-label">Backstory</label>
-                    <textarea asp-for="Backstory" class="form-control" rows="4"></textarea>
-                    <span asp-validation-for="Backstory" class="text-danger small" />
-                </div>
-
-                <div class="col-md-6">
-                    @if (ViewBag.NoBooksExist == true)
-                    {
-                        <div class="alert alert-warning d-flex align-items-center gap-2 small">
-                            <span>⚠️ No books exist yet. You can assign this character later.</span>
-                            <a asp-controller="Books" asp-action="Create" class="btn btn-sm btn-outline-primary ms-auto">➕ Create Book</a>
-                        </div>
-                    }
-                    <label asp-for="BookId" class="form-label">Book</label>
-                    <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId">
-                        <option value="">-- No Book Assigned --</option>
-                    </select>
-                    <span asp-validation-for="BookId" class="text-danger small" />
-                </div>
-                <div class="mb-4">
-                    <label asp-for="Description" class="form-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="5" placeholder="Enter character backstory or traits..."></textarea>
-                    <span asp-validation-for="Description" class="text-danger small"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Status" class="form-label"></label>
-                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<CharacterStatus>()">
-                        <option value="">-- Select Status --</option>
-                    </select>
-                    <span asp-validation-for="Status" class="text-danger"></span>
-                </div>
-
-                <div class="col-12 d-flex justify-content-between mt-4">
-                    <a asp-action="Index" class="btn btn-outline-secondary">← Back to List</a>
-                    <button type="submit" class="btn btn-primary">Save Character</button>
-                </div>
-            </div>
-        </form>
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-</div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Upload Character Image</label>
+        <div id="drop-zone" class="border border-secondary rounded p-4 text-center" style="cursor: pointer;">
+            <span id="drop-text">📁 Drag and drop an image here, or click to browse</span>
+            <input type="file" asp-for="ImageFile" class="form-control d-none" id="imageInput" />
+            <img id="preview" src="#" alt="Preview" class="img-fluid mt-3 d-none rounded shadow" style="max-height: 250px;" />
+        </div>
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+</form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const input = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+        const dropText = document.getElementById('drop-text');
+
+        dropZone.addEventListener('click', () => input.click());
+
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add('border-primary');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-primary');
+        });
+
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('border-primary');
+
+            const file = e.dataTransfer.files[0];
+            input.files = e.dataTransfer.files;
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                    dropText.classList.add('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        input.addEventListener('change', () => {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                    dropText.classList.add('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 }

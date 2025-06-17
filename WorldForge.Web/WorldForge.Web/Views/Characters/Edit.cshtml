@@ -1,75 +1,130 @@
-﻿@model WorldForge.Web.Models.Character
+﻿@model WorldForge.Web.Models.ViewModels.EditCharacterViewModel
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit Character";
 }
 
-<h1>Edit</h1>
+<h2 class="fw-bold mb-4">✏️ Edit Character</h2>
 
-<h4>Character</h4>
-<hr />
-<div class="card ">
+<div class="card">
     <div class="card-body">
-        <form asp-action="Edit">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label asp-for="Name" class="form-label">Full Name *</label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger small" />
-                </div>
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
 
-                <div class="col-md-6">
-                    <label asp-for="Gender" class="form-label">Gender</label>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Gender" class="form-label"></label>
                     <input asp-for="Gender" class="form-control" />
-                    <span asp-validation-for="Gender" class="text-danger small" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
                 </div>
-
-                <div class="col-md-6">
-                    <label asp-for="Race" class="form-label">Race / Species</label>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Race" class="form-label"></label>
                     <input asp-for="Race" class="form-control" />
-                    <span asp-validation-for="Race" class="text-danger small" />
+                    <span asp-validation-for="Race" class="text-danger"></span>
                 </div>
+            </div>
 
-                <div class="col-md-6">
-                    <label asp-for="Role" class="form-label">Story Role</label>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Role" class="form-label"></label>
                     <input asp-for="Role" class="form-control" />
-                    <span asp-validation-for="Role" class="text-danger small" />
+                    <span asp-validation-for="Role" class="text-danger"></span>
                 </div>
-
-                <div class="col-12">
-                    <label asp-for="Backstory" class="form-label">Backstory</label>
-                    <textarea asp-for="Backstory" class="form-control" rows="4"></textarea>
-                    <span asp-validation-for="Backstory" class="text-danger small" />
-                </div>
-
-                <div class="col-md-6">
-                    <label asp-for="BookId" class="form-label">Book</label>
-                    <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId"></select>
-                    <span asp-validation-for="BookId" class="text-danger small" />
-                </div>
-                <div class="mb-4">
-                    <label asp-for="Description" class="form-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="5" placeholder="Enter character description or traits..."></textarea>
-                    <span asp-validation-for="Description" class="text-danger small"></span>
-                </div>
-                <div class="mb-3">
+                <div class="col-md-6 mb-3">
                     <label asp-for="Status" class="form-label"></label>
-                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<CharacterStatus>()">
-                        <option value="">-- Select Status --</option>
-                    </select>
+                    <input asp-for="Status" class="form-control" />
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
+            </div>
 
-                <div class="col-12 d-flex justify-content-between mt-4">
-                    <a asp-action="Index" class="btn btn-outline-secondary">← Back to List</a>
-                    <button type="submit" class="btn btn-primary">Save Character</button>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Backstory" class="form-label"></label>
+                <textarea asp-for="Backstory" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Backstory" class="text-danger"></span>
+            </div>
+
+            <!-- Drag & Drop Image Upload -->
+            <div class="mb-3">
+                <label class="form-label">Upload Character Image</label>
+                <div id="dropZone" class="border border-primary rounded p-3 text-center" style="cursor: pointer;">
+                    <span id="dropText">Drag & Drop or Click to Upload</span>
+                    <input type="file" name="CharacterImageFile" id="CharacterImageFile" class="form-control d-none" accept="image/*" />
                 </div>
+                <div class="mt-3 text-center">
+                    <img id="previewImage" src="@Model.CharacterImageUrl" class="img-fluid rounded shadow" style="max-height: 200px;" alt="Preview" />
+                </div>
+                <input asp-for="CharacterImageUrl" class="form-control mt-2"/>
+                <span asp-validation-for="CharacterImageUrl" class="text-danger"></span>
+            </div>
+
+            <div class="text-end mt-4">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('CharacterImageFile');
+        const dropText = document.getElementById('dropText');
+        const previewImage = document.getElementById('previewImage');
+        const hiddenField = document.getElementById('CharacterImageUrl');
+        const characterImageUrlInput = document.getElementById('CharacterImageUrl');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropZone.classList.add('bg-light');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('bg-light');
+        });
+
+        dropZone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropZone.classList.remove('bg-light');
+            if (e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                dropText.textContent = `Selected: ${fileInput.files[0].name}`;
+                showPreview(fileInput.files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                dropText.textContent = `Selected: ${fileInput.files[0].name}`;
+                showPreview(fileInput.files[0]);
+            }
+        });
+
+        function showPreview(file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (previewImage) {
+                    previewImage.src = e.target.result;
+                }
+                if (characterImageUrlInput) {
+                    characterImageUrlInput.value = `/images/characters/${file.name}`;
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+}

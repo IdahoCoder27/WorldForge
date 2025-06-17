@@ -15,6 +15,10 @@ namespace WorldForge.Web.Models
 
         public string Synopsis { get; set; }
 
+        [Display(Name = "Cover Image URL")]
+        [StringLength(512)]
+        public string? CoverImageUrl { get; set; }
+
         [Display(Name = "Part of a Series?")]
         public bool IsSeries { get; set; }
 

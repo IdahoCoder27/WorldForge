@@ -1,8 +1,12 @@
+wwwroot\css\glass.css
 wwwroot\css\Login.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\characters\20db8942-a6bd-48a3-8f8c-2e49356f3cd4.png
+wwwroot\images\covers\BIOChipCover_d73692c7-a668-4d25-9167-ff621a17e736.png
+wwwroot\images\default-character.png
+wwwroot\images\default-cover.png
 wwwroot\images\login-side.png
 wwwroot\images\swirls.png
 wwwroot\js\drag-associations.js
 wwwroot\js\site.js
-wwwroot\css\glass.css
