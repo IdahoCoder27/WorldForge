@@ -5,6 +5,7 @@
     using SendGrid.Helpers.Mail;
     using System.Threading.Tasks;
     using WorldForge.Web.Interfaces;
+    using WorldForge.Web.Models;
 
     public class SendGridOptions
     {
@@ -15,19 +16,19 @@
 
     public class SendGridEmailSender : IEmailSender
     {
-        private readonly SendGridOptions _options;
+        private readonly SendGridSettings _settings;
 
-        public SendGridEmailSender(IOptions<SendGridOptions> options)
+        public SendGridEmailSender(IOptions<SendGridSettings> options)
         {
-            _options = options.Value;
+            _settings = options.Value;
         }
 
-        public async Task SendEmailAsync(string toEmail, string subject, string htmlMessage)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var client = new SendGridClient(_options.ApiKey);
-            var from = new EmailAddress(_options.SenderEmail, _options.SenderName);
-            var to = new EmailAddress(toEmail);
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent: null, htmlContent: htmlMessage);
+            var client = new SendGridClient(_settings.ApiKey);
+            var from = new EmailAddress("allen.gillis27@gmail.com", "WorldForge");
+            var to = new EmailAddress(email);
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);
             await client.SendEmailAsync(msg);
         }
     }

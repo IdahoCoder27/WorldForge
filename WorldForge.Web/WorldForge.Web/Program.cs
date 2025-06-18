@@ -6,9 +6,15 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WorldForge.Web.Interfaces;
 using WorldForge.Web.BusinessLogic;
+using WorldForge.Web.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+if(builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -33,6 +39,8 @@ builder.Services.AddAuthorization();
 //builder.Services.AddTransient<IEmailSender, DevEmailSender>();
 builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("SendGrid"));
 builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
+
+builder.Services.Configure<SendGridSettings>(builder.Configuration.GetSection("SendGrid"));
 
 
 
