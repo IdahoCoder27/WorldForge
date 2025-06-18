@@ -9,6 +9,8 @@
         public int TraitId { get; set; }
         public Trait Trait { get; set; }
 
+        public string? CustomDescription { get; set; }
+
         public DateTime AssignedOn { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\appsettings.Development.json
-G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\appsettings.json
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\libman.json
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\WorldForge.Web.staticwebassets.runtime.json
 G:\Code\WorldForge\WorldForge.Web\WorldForge.Web\bin\Debug\net8.0\WorldForge.Web.staticwebassets.endpoints.json

@@ -1,53 +1,50 @@
 ﻿@model WorldForge.Web.Models.Trait
-
+@using WorldForge.Web.Models
 @{
     ViewData["Title"] = "Create Trait";
+    var traitTypes = Enum.GetValues(typeof(TraitType)).Cast<TraitType>();
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-5">
-    <div class="card bg-dark text-light shadow-lg">
-        <div class="card-body">
-            <h2 class="mb-4">
-                <i class="bi bi-plus-circle-fill text-success"></i> Create New Trait
-            </h2>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 bg-dark bg-opacity-50 p-4 rounded shadow">
+            <h1 class="h3 mb-4 text-white">➕ Add New Trait</h1>
 
-            <form asp-action="Create">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label asp-for="Name" class="form-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger small"></span>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="Type" class="form-label">Trait Type</label>
-                        <select asp-for="Type" class="form-select">
-                            <option value="">-- Select Trait Type --</option>
-                            @foreach (var type in Enum.GetValues(typeof(WorldForge.Web.Models.TraitType)))
-                            {
-                                <option value="@type">@type</option>
-                            }
-                        </select>
-                        <span asp-validation-for="Type" class="text-danger small"></span>
-                    </div>
+            <form asp-action="Create" method="post">
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label text-light">Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Description" class="form-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-                    <span asp-validation-for="Description" class="text-danger small"></span>
+                    <label asp-for="Type" class="form-label text-light">Type</label>
+                    <select asp-for="Type" class="form-select">
+                        @foreach (var type in traitTypes)
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save-fill"></i> Save
-                </button>
-                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancel</a>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label text-light">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-outline-light">← Back to List</a>
+                    <button type="submit" class="btn btn-primary">Save Trait</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

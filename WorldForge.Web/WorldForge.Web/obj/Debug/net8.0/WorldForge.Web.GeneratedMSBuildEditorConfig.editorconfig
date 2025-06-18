@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHJhaXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Code/WorldForge/WorldForge.Web/WorldForge.Web/Areas/Admin/Views/Trait/_TraitList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHJhaXRcX1RyYWl0TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Code/WorldForge/WorldForge.Web/WorldForge.Web/Areas/Admin/Views/User/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVXNlclxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

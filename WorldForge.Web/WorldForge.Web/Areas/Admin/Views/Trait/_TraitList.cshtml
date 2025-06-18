@@ -1,0 +1,64 @@
+﻿@using WorldForge.Web.Models
+@model IEnumerable<IGrouping<string, WorldForge.Web.Models.Trait>>
+
+<!-- Search Bar -->
+<div class="mb-3">
+    <input type="text" id="traitSearch" class="form-control form-control-sm bg-dark text-light border-secondary"
+           placeholder="Search traits..." oninput="filterTraits()" />
+</div>
+
+<!-- Sort Toggle -->
+<div class="mb-3">
+    <select id="sortTraits" class="form-select form-select-sm bg-dark text-light border-secondary" onchange="sortTraits()">
+        <option value="type">Sort by Type</option>
+        <option value="name">Sort by Name</option>
+        <option value="recent">Recently Added</option>
+    </select>
+</div>
+
+<!-- Grouped Trait Containers -->
+<div id="groupedTraits">
+    @foreach (var group in Model)
+    {
+        <div class="mb-4">
+            <h6 class="text-uppercase text-info border-bottom pb-1 mb-2">@group.Key</h6>
+            <div class="row g-3">
+                @foreach (var trait in group)
+                {
+                    <div class="col-md-6 trait-card"
+                         data-trait-id="@trait.Id"
+                         data-trait-name="@trait.Name"
+                         data-trait-type="@trait.Type"
+                         style="cursor: grab;">
+                        <div class="bg-dark bg-opacity-50 p-3 rounded border border-@GetBorderColor(trait.Type) shadow-sm h-100">
+                            <h6 class="text-info fw-bold mb-1">@trait.Name</h6>
+                            @if (!string.IsNullOrWhiteSpace(trait.Description))
+                            {
+                                <p class="text-light mb-0">@trait.Description</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted fst-italic mb-0">No description provided.</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+
+@functions {
+    string GetBorderColor(TraitType type)
+    {
+        return type switch
+        {
+            TraitType.Physical => "primary",
+            TraitType.Mental => "success",
+            TraitType.Social => "purple",
+            _ => "secondary"
+        };
+    }
+}
+

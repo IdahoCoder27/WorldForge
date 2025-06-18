@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Admin\Traits\" />
     <Folder Include="wwwroot\images\covers\" />
     <Folder Include="wwwroot\images\characters\" />
   </ItemGroup>

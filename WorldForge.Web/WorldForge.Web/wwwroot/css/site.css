@@ -98,3 +98,7 @@ body[data-bs-theme='dark'] {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+#traitDropZone.dragover {
+    border-color: cyan;
+    box-shadow: 0 0 10px cyan;
+}

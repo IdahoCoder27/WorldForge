@@ -18,9 +18,18 @@ namespace WorldForge.Web.Areas.Admin.Controllers
         }
 
         // GET: Admin/Trait/Index
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search)
         {
-            var traits = await _context.Traits.ToListAsync();
+            var query = _context.Traits.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                query = query.Where(t =>
+                    t.Name.Contains(search) ||
+                    t.Description.Contains(search));
+            }
+
+            var traits = await query.OrderBy(t => t.Type).ThenBy(t => t.Name).ToListAsync();
             return View(traits);
         }
 
@@ -79,6 +88,20 @@ namespace WorldForge.Web.Areas.Admin.Controllers
             _context.Traits.Remove(trait);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var traits = await _context.Traits
+                .OrderBy(t => t.Type)
+                .ThenBy(t => t.Name)
+                .ToListAsync();
+
+            var groupedTraits = traits
+                .GroupBy(t => t.Type.ToString()); // Ensure grouping is fully evaluated
+
+            return PartialView("_TraitList", groupedTraits); // ✅ This view must expect IGrouping
         }
     }
 }

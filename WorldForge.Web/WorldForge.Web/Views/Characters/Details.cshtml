@@ -35,6 +35,11 @@
         <!-- Character Image -->
         <div class="col-md-3 text-center">
             <img src="@characterImage" alt="@Model.Name" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;" />
+            <button id="toggleTraitPanel"
+                    class="btn btn-outline-info w-100"
+                    style="max-width: 90%; margin-top: 10px;">
+                🧬 Assign Trait
+            </button>
         </div>
 
         <!-- Character Info -->
@@ -67,11 +72,49 @@
             @if (Model.CharacterTraits != null && Model.CharacterTraits.Any())
             {
                 <h5 class="mt-4">Traits</h5>
-                <div class="d-flex flex-wrap">
-                    @foreach (var trait in Model.CharacterTraits)
+                <div class="row g-3">
+                    @foreach (var ct in Model.CharacterTraits)
                     {
-                        <span class="badge bg-secondary me-2 mb-2">@trait.Trait.Name</span>
+                        <div class="col-md-6">
+                            <div class="bg-dark bg-opacity-50 p-3 rounded border border-secondary shadow-sm h-100">
+                                <h6 class="text-info fw-bold mb-1">@ct.Trait.Name <small class="badge bg-secondary ms-2">@ct.Trait.Type</small></h6>
+                                @if (!string.IsNullOrWhiteSpace(ct.CustomDescription))
+                                {
+                                    <p class="text-light mb-0">@ct.CustomDescription</p>
+                                }
+                                else
+                                {
+                                    <p class="text-muted fst-italic mb-0">No description provided.</p>
+                                }
+                            </div>
+                        </div>
                     }
+                </div>
+
+                <div class="mt-4">
+                    <h5>Assigned Traits</h5>
+                    <div id="traitDropZone" class="border border-info rounded p-3 mb-3 bg-opacity-25" style="min-height: 100px;">
+                        <p class="text-muted">Drag traits here to assign</p>
+
+                        <div class="row g-3">
+                            @foreach (var ct in Model.CharacterTraits)
+                            {
+                                <div class="col-md-6">
+                                    <div class="bg-dark bg-opacity-50 p-3 rounded border border-secondary shadow-sm h-100">
+                                        <h6 class="text-info fw-bold mb-1">@ct.Trait.Name <small class="badge bg-secondary ms-2">@ct.Trait.Type</small></h6>
+                                        @if (!string.IsNullOrWhiteSpace(ct.CustomDescription))
+                                        {
+                                            <p class="text-light mb-0">@ct.CustomDescription</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted fst-italic mb-0">No description provided.</p>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             }
 
@@ -88,8 +131,110 @@
         </div>
     </div>
 
+
+    <div id="traitPanel" class="position-fixed top-0 end-0 h-100 p-4 border-start border-secondary overflow-auto"
+     style="
+        width: 400px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1040;
+        background: rgba(15, 15, 15, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+     ">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Available Traits</h5>
+            <button class="btn btn-sm btn-close btn-light" onclick="toggleTraitPanel()"></button>
+        </div>
+        <div id="traitList">
+            <p class="text-muted">Loading traits...</p>
+        </div>
+    </div>
+
+
     <!-- Back Button -->
     <div class="mt-5">
         <a asp-action="Index" class="btn btn-outline-light">&larr; Back to Characters</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function toggleTraitPanel() {
+            const panel = document.getElementById("traitPanel");
+            panel.style.transform = panel.style.transform === "translateX(0%)"
+                ? "translateX(100%)"
+                : "translateX(0%)";
+        }
+
+        document.getElementById("toggleTraitPanel").addEventListener("click", async () => {
+            toggleTraitPanel();
+            const res = await fetch("/Admin/Trait/GetAll");
+            const html = await res.text();
+            document.getElementById("traitList").innerHTML = html;
+            enableDrag();
+        });
+
+        function enableDrag() {
+            const traitCards = document.querySelectorAll(".trait-card");
+            traitCards.forEach(card => {
+                card.setAttribute("draggable", "true");
+                card.addEventListener("dragstart", e => {
+                    e.dataTransfer.setData("traitId", card.dataset.traitId);
+                    e.dataTransfer.setData("traitName", card.dataset.traitName);
+                });
+            });
+
+            const dropZone = document.getElementById("traitDropZone");
+            dropZone.addEventListener("dragover", e => e.preventDefault());
+            dropZone.addEventListener("drop", e => {
+                e.preventDefault();
+                const traitId = e.dataTransfer.getData("traitId");
+                const traitName = e.dataTransfer.getData("traitName");
+                promptCustomValue(traitId, traitName);
+            });
+        }
+
+        function promptCustomValue(traitId, traitName) {
+            const customValue = prompt(`Enter a custom description for ${traitName}:`);
+            if (!customValue) return;
+
+            const characterId = @Model.Id;
+
+            fetch("/Admin/CharacterTrait/Assign", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ characterId, traitId, customDescription: customValue })
+            }).then(res => {
+                if (res.ok) location.reload();
+                else alert("Failed to assign trait.");
+            });
+        }
+
+        function filterTraits() {
+            const query = document.getElementById("traitSearch").value.toLowerCase();
+            document.querySelectorAll(".trait-card").forEach(card => {
+                const name = card.dataset.traitName.toLowerCase();
+                const type = card.dataset.type.toLowerCase();
+                card.style.display = (name.includes(query) || type.includes(query)) ? "" : "none";
+            });
+        }
+
+        function sortTraits() {
+            const mode = document.getElementById("sortTraits").value;
+            const groups = document.querySelectorAll(".trait-group");
+
+            groups.forEach(group => {
+                const traits = Array.from(group.querySelectorAll(".trait-card"));
+                traits.sort((a, b) => {
+                    if (mode === "name") return a.dataset.traitName.localeCompare(b.dataset.traitName);
+                    if (mode === "recent") return b.dataset.traitId - a.dataset.traitId;
+                    return 0;
+                });
+                traits.forEach(card => group.appendChild(card));
+            });
+        }
+    </script>
+}
