@@ -35,6 +35,11 @@
         <!-- Character Image -->
         <div class="col-md-3 text-center">
             <img src="@characterImage" alt="@Model.Name" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;" />
+            <!-- Trait Drop Zone -->
+            <div id="traitDropZone" class="mt-4 p-3 bg-dark bg-opacity-50 border border-info rounded shadow-sm text-light text-center"
+                 style="min-height: 100px; cursor: pointer; display: none;">
+                <p class="mb-0">🧬 Drag traits here to assign</p>
+            </div>
             <button id="toggleTraitPanel"
                     class="btn btn-outline-info w-100"
                     style="max-width: 90%; margin-top: 10px;">
@@ -90,32 +95,6 @@
                         </div>
                     }
                 </div>
-
-                <div class="mt-4">
-                    <h5>Assigned Traits</h5>
-                    <div id="traitDropZone" class="border border-info rounded p-3 mb-3 bg-opacity-25" style="min-height: 100px;">
-                        <p class="text-muted">Drag traits here to assign</p>
-
-                        <div class="row g-3">
-                            @foreach (var ct in Model.CharacterTraits)
-                            {
-                                <div class="col-md-6">
-                                    <div class="bg-dark bg-opacity-50 p-3 rounded border border-secondary shadow-sm h-100">
-                                        <h6 class="text-info fw-bold mb-1">@ct.Trait.Name <small class="badge bg-secondary ms-2">@ct.Trait.Type</small></h6>
-                                        @if (!string.IsNullOrWhiteSpace(ct.CustomDescription))
-                                        {
-                                            <p class="text-light mb-0">@ct.CustomDescription</p>
-                                        }
-                                        else
-                                        {
-                                            <p class="text-muted fst-italic mb-0">No description provided.</p>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
             }
 
             @if (Model.Books != null && Model.Books.Any())
@@ -164,9 +143,15 @@
     <script>
         function toggleTraitPanel() {
             const panel = document.getElementById("traitPanel");
+            const dropZone = document.getElementById("traitDropZone");
+            const isOpen = panel.style.transform === "translateX(0%)";
             panel.style.transform = panel.style.transform === "translateX(0%)"
                 ? "translateX(100%)"
                 : "translateX(0%)";
+            // Toggle drop zone visibility
+            if (dropZone) {
+                dropZone.style.display = isOpen ? "none" : "block";
+             }
         }
 
         document.getElementById("toggleTraitPanel").addEventListener("click", async () => {
@@ -174,13 +159,15 @@
             const res = await fetch("/Admin/Trait/GetAll");
             const html = await res.text();
             document.getElementById("traitList").innerHTML = html;
-            enableDrag();
+            enableDragAndDrop();
         });
 
-        function enableDrag() {
+        function enableDragAndDrop() {
             const traitCards = document.querySelectorAll(".trait-card");
+
             traitCards.forEach(card => {
                 card.setAttribute("draggable", "true");
+
                 card.addEventListener("dragstart", e => {
                     e.dataTransfer.setData("traitId", card.dataset.traitId);
                     e.dataTransfer.setData("traitName", card.dataset.traitName);
@@ -188,28 +175,34 @@
             });
 
             const dropZone = document.getElementById("traitDropZone");
+
+            if (!dropZone) return;
+
             dropZone.addEventListener("dragover", e => e.preventDefault());
-            dropZone.addEventListener("drop", e => {
+
+            dropZone.addEventListener("drop", async e => {
                 e.preventDefault();
+
                 const traitId = e.dataTransfer.getData("traitId");
                 const traitName = e.dataTransfer.getData("traitName");
-                promptCustomValue(traitId, traitName);
-            });
-        }
+                const characterId = @Model.Id;
 
-        function promptCustomValue(traitId, traitName) {
-            const customValue = prompt(`Enter a custom description for ${traitName}:`);
-            if (!customValue) return;
+                const customDescription = prompt(`Enter a custom description for "${traitName}" (e.g., Height: 6'2", IQ: 145):`);
+                if (!customDescription || customDescription.trim() === "") return;
 
-            const characterId = @Model.Id;
+                const payload = { characterId, traitId, customDescription };
 
-            fetch("/Admin/CharacterTrait/Assign", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ characterId, traitId, customDescription: customValue })
-            }).then(res => {
-                if (res.ok) location.reload();
-                else alert("Failed to assign trait.");
+                const response = await fetch("/Admin/CharacterTrait/Assign", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert("Failed to assign trait. Please try again.");
+                }
             });
         }
 
@@ -238,3 +231,4 @@
         }
     </script>
 }
+
