@@ -1,12 +1,310 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "G:\\Code\\WorldForge\\WorldForge.Web\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\views\\characters\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\views\\characters\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\views\\trait\\_traitlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\views\\trait\\_traitlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\controllers\\traitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\controllers\\traitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\models\\trait.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\models\\trait.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\models\\charactertrait.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\models\\charactertrait.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\views\\trait\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\views\\trait\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\controllers\\charactertraitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\controllers\\charactertraitcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\models\\viewmodels\\charactertraitassignrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\models\\viewmodels\\charactertraitassignrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\views\\trait\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\views\\trait\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\areas\\admin\\views\\trait\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\areas\\admin\\views\\trait\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\controllers\\admin\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\controllers\\admin\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\businesslogic\\sendgridemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\businesslogic\\sendgridemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\interfaces\\iemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\interfaces\\iemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|g:\\code\\worldforge\\worldforge.web\\worldforge.web\\models\\sendgridsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3938798B-A1EA-4223-B4B9-1F718BE5F69A}|WorldForge.Web\\WorldForge.Web.csproj|solutionrelative:worldforge.web\\models\\sendgridsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 502,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Trait.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\Trait.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Models\\Trait.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\Trait.cs",
+              "RelativeToolTip": "WorldForge.Web\\Models\\Trait.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T23:10:22.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "site.css",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "WorldForge.Web\\wwwroot\\css\\site.css",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "WorldForge.Web\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-18T22:55:17.844Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CharacterTraitAssignRequest.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\ViewModels\\CharacterTraitAssignRequest.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Models\\ViewModels\\CharacterTraitAssignRequest.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\ViewModels\\CharacterTraitAssignRequest.cs",
+              "RelativeToolTip": "WorldForge.Web\\Models\\ViewModels\\CharacterTraitAssignRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T20:38:19.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_TraitList.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\_TraitList.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\_TraitList.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\_TraitList.cshtml",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\_TraitList.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T20:35:01.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Views\\Characters\\Details.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Views\\Characters\\Details.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Views\\Characters\\Details.cshtml*",
+              "RelativeToolTip": "WorldForge.Web\\Views\\Characters\\Details.cshtml*",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T20:31:36.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CharacterTraitController.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Controllers\\CharacterTraitController.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Controllers\\CharacterTraitController.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Controllers\\CharacterTraitController.cs",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Controllers\\CharacterTraitController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T20:27:15.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CharacterTrait.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\CharacterTrait.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Models\\CharacterTrait.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\CharacterTrait.cs",
+              "RelativeToolTip": "WorldForge.Web\\Models\\CharacterTrait.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAxwBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T20:22:11.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Edit.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Edit.cshtml",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Edit.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAUwDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T20:12:06.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Create.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Create.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Create.cshtml",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Create.cshtml",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAUwCEAAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T20:01:26.905Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Index.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Index.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Index.cshtml",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Views\\Trait\\Index.cshtml",
+              "ViewState": "AgIAABMAAAAAAAAAAAAUwEIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T20:00:42.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TraitController.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Controllers\\TraitController.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Areas\\Admin\\Controllers\\TraitController.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Areas\\Admin\\Controllers\\TraitController.cs",
+              "RelativeToolTip": "WorldForge.Web\\Areas\\Admin\\Controllers\\TraitController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAswGUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:56:45.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WorldForge.Web\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAC4AAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-18T19:54:12.118Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Controllers\\Admin\\AdminController.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Controllers\\Admin\\AdminController.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Controllers\\Admin\\AdminController.cs",
+              "RelativeToolTip": "WorldForge.Web\\Controllers\\Admin\\AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:53:51.353Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SendGridEmailSender.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\BusinessLogic\\SendGridEmailSender.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\BusinessLogic\\SendGridEmailSender.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\BusinessLogic\\SendGridEmailSender.cs",
+              "RelativeToolTip": "WorldForge.Web\\BusinessLogic\\SendGridEmailSender.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:21:43.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IEmailSender.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Interfaces\\IEmailSender.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Interfaces\\IEmailSender.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Interfaces\\IEmailSender.cs",
+              "RelativeToolTip": "WorldForge.Web\\Interfaces\\IEmailSender.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:20:46.826Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "SendGridSettings.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\SendGridSettings.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Models\\SendGridSettings.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Models\\SendGridSettings.cs",
+              "RelativeToolTip": "WorldForge.Web\\Models\\SendGridSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:19:12.142Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Controllers\\AccountController.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WorldForge.Web\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMYAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:17:36.279Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Program.cs",
+              "RelativeDocumentMoniker": "WorldForge.Web\\Program.cs",
+              "ToolTip": "G:\\Code\\WorldForge\\WorldForge.Web\\WorldForge.Web\\Program.cs",
+              "RelativeToolTip": "WorldForge.Web\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-18T19:16:17.988Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
